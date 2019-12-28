@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="col-md-3" style="
+                                  position: absolute;
+                                  left: 50%;
+                                  margin-left: -150px;
+                                  top: 30%;
+                                  margin-top: -100px;">
+    {% for list in object_list %}
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">
+                    {% if list.status == True %}
+                        <p style="text-decoration: line-through">
+                            <input type="checkbox" id="coding" name="interest" value="True" class="mr-2" checked>{{ list.title }}</p>
+                        {% else %}
+                        <p><input type="checkbox" id="coding" name="interest" value="False" class="mr-2">{{ list.title }}</p>
+                    {% endif %}
+                </h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ list.date_pub }}</h6>
+                <a href="{% url 'update' list.pk %}" class="card-link">Изменить</a>
+                <a href="{% url 'delete' list.pk %}" class="card-link">Удалить</a>
+            </div>
+        </div>
+  {% endfor %}
+    </div>
+{% endblock %}
+
